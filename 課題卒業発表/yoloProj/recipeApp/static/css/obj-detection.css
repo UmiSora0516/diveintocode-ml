@@ -1,0 +1,97 @@
+.bg_img {
+    background-image: url(/static/img/AI.png);
+    background-color:rgba(255,255,255,0.4);
+    background-blend-mode:lighten;
+    background-repeat: no-repeat;
+}
+
+.font_only {
+  font-family: 'Kaisei Decol', serif;
+}
+
+/* classセレクタ。class名が一致するタグに適用 */
+.pred_img_size{
+    width: 500px;
+    height: auto;  /* ←縦横比を維持する高さを自動計算 */
+}
+
+span.font_style{
+    font-family: "Comic Sans MS";
+    color: orange;
+}
+
+span.font_style2{
+    font-family: 'Kaisei Decol', serif;
+    color: orange;
+}
+
+span.font_title{
+    font-family: 'Kaisei Decol', serif;
+    font-size: 54px;
+    color: orange;
+
+}
+
+.img_wrap{
+  border: 1px solid #ddd;
+  width: 150px;
+  height: auto;
+/*
+  margin: 20px auto 0;
+*/
+  transition-duration: 0.5s;
+}
+.img_wrap img{
+  width: 100%;
+  cursor: pointer;
+}
+.img_wrap:hover{
+  box-shadow: 10px 10px 10px rgba(0,0,0,0.5);
+  transform: translateY(-10px);
+  transition-duration: 0.5s;
+}
+
+h2.line_style{
+  padding: 0.5em 0;/*上下の余白*/
+  border-top: double  5px orange;/*上線*/
+  border-bottom: double  5px orange;/*下線*/
+}
+
+.w_30{
+    width: 30%;
+}
+
+.balloon3-right {
+  position: relative;
+  display: inline-block;
+  margin: 0px 10px 0px 0;
+  padding: 0 2px;
+  width: 55px;
+  height: 55px;
+  line-height: 55px;
+  text-align: center;
+  color: #FFF;
+  font-size: 16px;
+  font-weight: bold;
+  background: #82e357;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.balloon3-right:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -25px;
+  margin-top: -15px;
+  border: 15px solid transparent;
+  border-left: 15px solid #82e357;
+  z-index: 0;
+}
+
+.text {
+    overflow: hidden;
+    margin-top: 10px;
+    margin-right: 45px;
+}
+

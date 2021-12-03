@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<form action="{% url 'index' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {#forms.ImageFieldを表示#}
+    <div class="mb-3 input-group">
+        {{ form.file }}&nbsp;&nbsp;<button type="submit" class="btn" name="exe_detect" style="color: #fff; background-color: #82e357;">物体検出実行</button>
+    </div>
+
+    {#エラーメッセージを表示#}
+    {% for field in form %}
+    {% if form.errors %}
+    <font color=#CC3300>{{ field.errors }}</font><br>
+    {% endif %}
+    {% endfor %}
+</form>
+    {#保存されたファイル名を表示#}
+    {% if filename_save %}
+<!--    ファイル名 {{ filename_save }} で保存されました。-->
+        <br>
+        <div class="row">
+            <div class="col text-center">
+                <p class="h4">オリジナル画像</p>
+                <img src={{filename_save}} alt="obj_image" class="pred_img_size">
+            </div>
+            <div class="col-1 align-self-center" style="padding-left: 0px;" >
+                <img src="/static/img/arrow.png" >
+            </div>
+            <div class="col text-center">
+                <p class="h4">物体検出を実行した画像</p>
+                <img src={{pred_img_path}} alt="pred_image" class="pred_img_size">
+                <br><br>
+                <h3><span style="padding: 1px 10px;background-color: orange;">検出結果</span>&nbsp;&nbsp;{{pred}}</h3>
+            </div>
+        </div>
+        <br><br>
+        <h2 class="line_style">
+            <div class="balloon3-right font_only">今日の</div>
+            <span class="font_style2">cookpadの人気レシピ</span>
+            <img src="/static/img/life327.png">
+        </h2>
+
+        <!-- 検索フォーム -->
+<!--        <div class="d-flex justify-content-center">-->
+        <br>
+        <div>
+            <form class="form-inline my-2" method="POST" action="{% url 'index' %}">
+                {% csrf_token %}
+                <div class="w_30" >
+                <div class="input-group">
+                    <input type="text" class="form-control font_only" placeholder="追加したい材料" name="search_key" value="{{request.POST.search_key}}">
+                    <button type="submit" class="btn"  name="exe_search" style="background-color: orange;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </button>
+                </div>
+                </div>
+
+                <input type="hidden" name="pred_img_path" value="{{pred_img_path}}">
+                <input type="hidden" name="filename_save" value="{{filename_save}}">
+                <input type="hidden" name="pred" value="{{pred}}">
+                <input type="hidden" name="search_keywords" value="{{search_keywords}}">
+
+            </form>
+        </div>
+<!--        </div>-->
+
+        <br>
+        <div class="row">
+        {% for recipe in recipes_dict %}
+            <div id="recipe_{{ forloop.counter }}" class="col">
+                <img src="/static/img/rank{{ forloop.counter }}.png">
+                <a id="recipe_image_{{ forloop.counter }}" href={{ recipe.href }} target="_blank">
+                    <h5 style="padding: 7px 0 5px 0;">{{ recipe.recipe_name }}</h5>
+                    <div class="img_wrap" style="float: left;  margin-right:15px;" >
+                        <img alt={{ recipe.recipe_name }} src={{ recipe.src }} >
+                    </div>
+                </a>
+                <div class="text">
+                    {{ recipe.description }}
+                </div>
+            </div>
+
+        {% endfor %}
+        </div>
+    {% endif %}
+
+
+<br><br><br>
+
+{% endblock content %}
